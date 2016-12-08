@@ -21,7 +21,7 @@ function lc_send (nick, line, comment_id, typing_update_num, cb) {
     distance: Number (slider.noUiSlider.get())}
   if (typing_update_num) data.typing_update_num = typing_update_num
 
-  $.ajax ('http://sphere.buzz/', {method: 'POST', dataType: 'json', contentType: 'application/json',
+  $.ajax ('//sphere.buzz/r', {method: 'POST', dataType: 'json', contentType: 'application/json',
     headers: {'X-Mode': 'comment'},
     data: JSON.stringify (data),
     success: function (ev) {
@@ -147,7 +147,7 @@ function fetch_shouts (max_lm, success, error) {
     location: {latitude: lc_coordinates.latitude, longitude: lc_coordinates.longitude},
     distance: Number (slider.noUiSlider.get())}
 
-  $.ajax ('http://sphere.buzz/', {method: 'POST', dataType: 'json', contentType: 'application/json',
+  $.ajax ('//sphere.buzz/r', {method: 'POST', dataType: 'json', contentType: 'application/json',
     headers: {'X-Mode': 'fetch_updates'},
     data: JSON.stringify (request),
     success: success,
@@ -155,7 +155,7 @@ function fetch_shouts (max_lm, success, error) {
 
 // Get an IP-based location from the server.
 function ip2loc (success, error) {
-  $.ajax ('http://sphere.buzz/', {method: 'POST', dataType: 'json', contentType: 'application/json',
+  $.ajax ('//sphere.buzz/r', {method: 'POST', dataType: 'json', contentType: 'application/json',
     headers: {'X-Mode': 'ip2loc'},
     data: JSON.stringify ({}),
     success: success,

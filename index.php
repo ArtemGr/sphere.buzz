@@ -1,7 +1,7 @@
 <?php
   // NB: To see the PHP error log in codeanywhere: $ sudo tail -f /var/log/apache2/error.log
 
-  $cu = curl_init ('http://sphere.buzz/');  // TODO: Use 'localhost' when working alongside the service.
+  $cu = curl_init ('http://sphere.buzz/r');  // TODO: Use 'localhost' when working alongside the service.
   curl_setopt ($cu, CURLOPT_RETURNTRANSFER, 1);
   curl_setopt ($cu, CURLOPT_HTTPHEADER, [
     'X-Mode: about',
@@ -12,10 +12,8 @@
   $about_request = json_encode ([
     'uri' => $_SERVER['REQUEST_URI']
   ], JSON_UNESCAPED_UNICODE);
-  error_log ('$about_request: ' . $about_request);
   curl_setopt ($cu, CURLOPT_POSTFIELDS, $about_request);
   $about_response = curl_exec ($cu);
-  error_log ('$about_response: ' . $about_response);
   $about_response = json_decode ($about_response, 1);
   curl_close ($cu);
   if (!empty ($about_response['location'])) {
