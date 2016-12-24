@@ -1,6 +1,11 @@
 <?php
   // NB: To see the PHP error log in codeanywhere: $ sudo tail -f /var/log/apache2/error.log
 
+  // We need HTTPS in order for some of the Chrome APIs to work.
+  if (empty ($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off") {
+    exit ('Not HTTPS.');  // Web server should have redirected the browser to the HTTPS version of the site.
+  } else header ('Strict-Transport-Security: max-age=3600');  // NB: HSTS only works when we already under HTTPS.
+
   $cu = curl_init ('http://sphere.buzz/r');  // TODO: Use 'localhost' when working alongside the service.
   curl_setopt ($cu, CURLOPT_RETURNTRANSFER, 1);
   curl_setopt ($cu, CURLOPT_HTTPHEADER, [

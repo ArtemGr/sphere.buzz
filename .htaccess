@@ -1,6 +1,10 @@
 # cf. http://httpd.apache.org/docs/current/mod/mod_rewrite.html
 
 RewriteEngine On
+
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}/$1 [R=301,L]
+
 # NB: The pattern might match some extra characters in order to let the visitors make mistakes in the URL
 # and correct them with the URL cleaning code. cf. `fn local_chat`, mode "about" for the URL cleaning code.
 RewriteRule ^[a-z]+/?$ index.php [L]
